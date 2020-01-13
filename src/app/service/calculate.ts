@@ -33,7 +33,7 @@ export class FakeCalculateService implements CalculateService {
   id = Math.random();
 
   calculate(x: number, y: number): number {
-    console.log(this.id);
+    console.log('log from fake calculate ' + this.id);
     return this.resultValue;
   }
 }

@@ -1,10 +1,20 @@
 
 <div>
+  <h1>Power feature</h1>
   <input #base placeholder="input base number">
   <input #power placeholder="input power number">
   <button (click)="handleCalculateButton()">Calculate</button>
   <div style="padding: 20px; border: 1px solid green">
     Result will be shown here
     {{result}}
+  </div>
+</div>
+
+<div>
+  <h1>Concat feature</h1>
+
+  <div style="padding: 20px; border: 1px solid green">
+    Result will be shown here
+    {{concatResult | async}}
   </div>
 </div>
