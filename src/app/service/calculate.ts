@@ -6,10 +6,21 @@ export function calculate(x: number, y: number) {
 }
 
 
+export interface CalculateService {
+  calculate(x: number, y: number);
+}
+
 @Injectable({
-  providedIn: 'root',
+  providedIn: null,
 })
 export class CalculateService {
+
+  public static fakeWithValue(value: number) {
+    const fake = new FakeCalculateService();
+    fake.resultValue = value;
+    return fake;
+  }
+
   calculate(x: number, y: number) {
     // take 20 min
     return Math.pow(x, y);
@@ -17,8 +28,12 @@ export class CalculateService {
 }
 
 
-export class FakeCalculateService extends CalculateService {
+export class FakeCalculateService implements CalculateService {
+  resultValue = 20;
+  id = Math.random();
+
   calculate(x: number, y: number): number {
-    return 20;
+    console.log(this.id);
+    return this.resultValue;
   }
 }
