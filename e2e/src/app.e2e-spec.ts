@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import {browser, By, element, logging, protractor, ProtractorBrowser} from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -8,9 +8,13 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('angular-test app is running!');
+  it('should display welcome message', async () => {
+    await page.navigateTo();
+    const inputElem = await element(By.css('input[aria-label="input-1"]')).getWebElement();
+    expect(await inputElem.isDisplayed()).toBeTruthy();
+    await inputElem.clear();
+    await inputElem.sendKeys('123123');
+    await inputElem.sendKeys(protractor.Key.ENTER);
   });
 
   afterEach(async () => {
