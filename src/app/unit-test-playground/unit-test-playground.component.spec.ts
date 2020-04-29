@@ -53,4 +53,18 @@ fdescribe('Unit test component', () => {
         expect(fixture.componentInstance.inputElement.nativeElement.disabled).toBeTruthy();
     })
 
+    it('should call add on click on Add button', () => {
+
+        const service: UnitTestPlaygroundService = TestBed.get(UnitTestPlaygroundService);
+        spyOn(service, 'add');
+        fixture.detectChanges();
+
+        const addButtonElement: ElementRef<HTMLButtonElement> = fixture.debugElement.query(By.css('button'));
+        const clickEvent = new Event('click');
+        addButtonElement.nativeElement.dispatchEvent(clickEvent);
+        fixture.detectChanges();
+        expect(service.add).toHaveBeenCalledTimes(1);
+
+    })
+
 });
