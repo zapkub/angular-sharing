@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild, ElementRef, OnInit} from '@angular/core';
 import {UnitTestPlaygroundService} from './unit-test-playground.service';
+import { AService } from './a.service';
 
 
 @Component({
@@ -10,16 +11,22 @@ import {UnitTestPlaygroundService} from './unit-test-playground.service';
       {{unitTestPlaygroundService.result}}
     </div>
 
-    <input #inputElement />
+    <input #inputElement [disabled]='!unitTestPlaygroundService.isAllowUserToInputValue' />
     <button (click)="unitTestPlaygroundService.add(inputElement.value)">Add</button>
   `,
-  providers: [
-    UnitTestPlaygroundService
-  ]
 })
 export class UnitTestPlaygroundComponent {
 
+  @ViewChild('inputElement', {static: true}) inputElement: ElementRef<HTMLInputElement>
 
-  constructor(private unitTestPlaygroundService: UnitTestPlaygroundService) { }
+  get value() {
+    return this.inputElement.nativeElement.value;
+  }
+
+  constructor(
+    public unitTestPlaygroundService: UnitTestPlaygroundService,
+    public aService: AService,
+  ) { }
+
 
 }
